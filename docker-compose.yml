@@ -124,3 +124,14 @@ services:
     depends_on:
       - prometheus
     restart: always
+
+  redis:
+    image: redis:buster
+
+  website:
+    build:
+      context: ./website/
+    ports:
+      - "8500:8500"
+    links:
+      - redis
