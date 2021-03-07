@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MovimientoPatente extends Model
 {
-    protected $fillable=['patente_id'];
+    protected $fillable=['patente_id','precision'];
 
     protected $with = ['patente'];
 

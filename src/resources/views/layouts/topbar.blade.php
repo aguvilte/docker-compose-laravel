@@ -8,6 +8,49 @@
 
   <!-- Topbar Navbar -->
   <ul class="navbar-nav ml-auto">
+    <li class="nav-item dropdown no-arrow mx-1 ">
+      <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-bell fa-fw"></i>
+        <!-- Counter - Alerts -->
+        @if (Auth()->user()->unreadNotifications->count() > 0)
+          <span class="badge badge-danger badge-counter" id="spanIcon">
+            {{ Auth()->user()->unreadNotifications->count()}}
+          </span> 
+        @endif
+      </a>
+      <!-- Dropdown - Alerts -->
+      <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in navbarIcon" aria-labelledby="alertsDropdown" id="notificaciones">
+        <h6 class="dropdown-header" id="notificacionA">
+         Alertas de detección 
+        </h6>
+      @foreach (Auth()->user()->unreadNotifications as $notification)
+        <a class="dropdown-item d-flex align-items-center bg-gray-200"  href="{{ url("/notificaciones/show/{$notification->id}") }}">
+          <div class="mr-3">
+            <div class="icon-circle bg-warning">
+              <i class="fas fa-exclamation-triangle text-white"></i>
+            </div>
+          </div>
+          <div>
+            <div class="small text-gray-500">{{ $notification->data['fecha'] }}</div>
+            <span class="font-weight-bold">La patatente  {{ $notification->data['numero_patente']}} fue detectada por nuestras cámaras</span>
+          </div>
+        </a>
+      @endforeach
+       @foreach (Auth()->user()->readNotifications->take(5) as $notification)
+        <a class="dropdown-item d-flex align-items-center" href="{{ url("/notificaciones/show/{$notification->id}") }}">
+          <div class="mr-3">
+            <div class="icon-circle bg-warning">
+              <i class="fas fa-exclamation-triangle text-white"></i>
+            </div>
+          </div>
+          <div>
+            <div class="small text-gray-500">{{ $notification->data['fecha'] }}</div>
+            <span class="font-weight-bold">La patatente  {{ $notification->data['numero_patente']}} fue detectada por nuestras cámaras</span>
+          </div>
+        </a>
+      @endforeach
+       <a class="dropdown-item text-center small text-gray-500" href="{{ route('indexNotificaciones') }}">Ver todas las alertas</a>
+    </li>
     <div class="topbar-divider d-none d-sm-block"></div>
 
     <!-- Nav Item - User Information -->
@@ -34,10 +77,12 @@
 
       </div>
 
-  </li>
+    </li>
 
-</ul>
+  </ul>
 
 </nav>
-
+<script>
+  let cantidad = "{{Auth()->user()->unreadNotifications->count() }}"
+</script>
 <!-- End of Topbar -->

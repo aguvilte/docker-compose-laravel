@@ -1,7 +1,7 @@
 @extends('layouts.dashboa')
 
 @section('titulo')
-ALP-LEARNING
+ALP-LEARNING | Patentes
 @endsection
 
 @section('content')
@@ -25,16 +25,7 @@ ALP-LEARNING
                 @foreach ($patentes as $pat)
                 <tr>
                     <td>{{ $pat->patente->numero }}</td>
-                    @if ($pat->patente->modelo == 1)
-                        <td>Viejo</td>
-                    @endif
-                    @if ($pat->patente->modelo == 2)
-                        <td>Nuevo</td>
-                    @endif
-                    @if ($pat->patente->modelo != 1 && $pat->patente->modelo !=2)
-                        <td>NS</td>
-                    @endif
-
+                    <td>{{ $pat->patente->modelo }}</td>
                     <td>{{ $pat->precision }}</td>
                     <td>{{ $pat->created_at }}</td>
                 </tr>
@@ -53,6 +44,5 @@ ALP-LEARNING
     @include('layouts.footer')
 @endsection
 @section('javascript')
-    <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/echoChanel.js') }}"></script>
 @endsection

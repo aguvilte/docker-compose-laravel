@@ -36,4 +36,19 @@ class ResetPasswordController extends Controller
     {
         $this->middleware('guest');
     }
+
+     /**
+     * Get the password reset validation error messages.
+     *
+     * @return array
+     */
+    protected function validationErrorMessages()
+    {
+        return [
+            'email.required' => 'El correo electrónico es requerido.',
+            'password.required' => 'La contraseña es requerida.',
+            'password.confirmed' => 'Las constraseñas deben ser identicas.',
+            'password.min' => "Las contraseñas debe tener un minimo de :min caracteres."
+        ];
+    }
 }

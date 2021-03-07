@@ -31,7 +31,7 @@ class PatentesController extends Controller
     {
         //aca deberiamos definir como hacer si tomamos la foto desde la carpeta de donde recibimos los datos
         $datosPatente =[
-            "numero"=>"lfd453",
+            "numero"=>"rdv111",
             "precision"=> "89.90"
         ];
         //aca se debera validar cuando se reciban los datos
@@ -67,11 +67,11 @@ class PatentesController extends Controller
             //confirmamos la transaccion y redireccionamos
             DB::commit();
             event(new ActividadPatente($movimiento));
-           // event(new ConfirmedRobo($movimiento));
-           //return redirect()->route('indexPatente');   
+            event(new ConfirmedRobo($movimiento));
         } catch (\Throwable $th) {
+            // llamamos al evento de cache
+            $this->cacheRedis($patente, $movimiento);
             DB::rollBack();
-            //se deberia llamar al evento de cache
             return response()->json(['error' => $th->getMessage()], 500);        
         } 
        
@@ -210,9 +210,13 @@ class PatentesController extends Controller
     }
 
 
-    public function cache($cachePatente, $key)
-    {
-        Redis::hmset($key,[$cachePatente]);
+    public function cacheRedis($patente, $movimiento)
+    {     
+        Redis::hmset('patente:'. $patente->id,[
+            'numero' => $patente->numero,
+            'modelo' => $patente->modelo,
+            'precision' => $movimiento->precision
+        ]);
     }
 
 

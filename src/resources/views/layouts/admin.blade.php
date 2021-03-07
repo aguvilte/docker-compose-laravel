@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('titulo')</title>
 
@@ -15,6 +16,12 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/customBell.css') }}" rel="stylesheet">
+     @auth()
+      <script>
+        var user = "{{ auth()->user()->id }}"
+      </script>
+     @endauth 
     @yield('head')
   </head>
   
@@ -40,7 +47,13 @@
     <!-- Core plugin JavaScript-->
     <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
-    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>  
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+      @auth()
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/echoPrivate.js') }}"></script>
+        <script src="{{ asset('enable-push.js') }}" defer></script>
+      @endauth 
     @yield('javascript')
   </body>
 </html>

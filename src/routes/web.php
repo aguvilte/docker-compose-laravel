@@ -1,6 +1,6 @@
 <?php
 
-Auth::routes(['verify' => false]);
+Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('home');
 //Esta ruta  hay que modificar a post
 Route::get('/store','PatentesController@store');
@@ -15,11 +15,13 @@ Route::group(['prefix' => 'patentes'], function(){
 });
 
 /*PERSONAS*/
-Route::group(['prefix' => 'personas'], function(){
-    Route::get('/', 'PersonasRobadasController@index')->name('indexPersona');
-    Route::get('/create', 'PersonasRobadasController@create');
-    Route::post('/save', 'PersonasRobadasController@save');
-    Route::get('/edit/{id}', 'PersonasRobadasController@edit');
-    Route::put('/update/{id}', 'PersonasRobadasController@update');
+Route::resource('denuncias', 'DenunciaController')->except('show');
+Route::get('denuncias/{id}/show', 'DenunciaController@show')->name('denuncias.show');
+Route::get('denuncias/{id}/estado', 'DenunciaController@cambioEstado')->name('denuncias.estado');
+/*Notificaciones*/
+Route::group(['prefix' => 'notificaciones'], function () {
+    Route::get('/','NotificacionesController@index')->name('indexNotificaciones');
+    Route::get('/show/{id}', 'NotificacionesController@show');
+    Route::get('/detalles/{id}','NotificacionesController@detalles')->name('noti-detalles');
 });
-
+Route::post('/push','PushController@store');

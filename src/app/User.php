@@ -7,10 +7,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmail;
+use NotificationChannels\WebPush\HasPushSubscriptions; 
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+    use HasPushSubscriptions;
 
     /**
      * The attributes that are mass assignable.

@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Redis;
-use App\Patentes;
+use App\Models\Patente;
 
 class cacheObjetos extends Command
 {
@@ -40,19 +40,19 @@ class cacheObjetos extends Command
     public function handle()
     {
         
-        $key = 'Patnete:*';
-        $stored = Redis::hgetall($key);
-
-        $keys = Redis::keys('*');
-       // dd($keys);
+        $keys = Redis::keys('patente:*');
+        $patentes= [];
+       
         foreach ($keys as $objeto ) {
-            $claves = explode('alp_learning_database_', $objeto);
-            echo $claves[1];
-            $result = Redis::hgetall($claves[1]);
-            var_dump($result);
-            
+            $objeto = Redis::hgetall($objeto);
+            $patente = Patente::where("numero", $objeto["numero"])->firstOrCreate([
+                "numero" => $objeto["numero"], 
+                "modelo" => $objeto["modelo"]
+            ]);
+            $patente->movimientoPatentes()->create([
+                'precision' => $objeto["precision"]
+            ]);
+          
         }
-        //$patente = Redis::hgetall('Patnete:AA975PI');
-        //dd($patente);
     }
 }

@@ -20,10 +20,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         \App\Events\ConfirmedRobo::class => [
             \App\Listeners\NotificationRobo::class,
-        ],
-        \App\Events\EventAlertRobo::class => [
-            \App\Listeners\AlertRobo::class,
-        ],
+        ]
     ];
 
     /**

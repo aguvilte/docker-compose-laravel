@@ -15,11 +15,12 @@ class CreateRobosTable extends Migration
     {
         Schema::create('robos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('persona_robada_id');
+            $table->unsignedBigInteger('denuncia_id');
             $table->string("numero_patente");
-            $table->date("fecha_hora");
+            $table->dateTime("fecha_hora");
+            $table->text("descripcion");
             
-            $table->foreign('persona_robada_id')->references('id')->on('persona_robadas');
+            $table->foreign('denuncia_id')->references('id')->on('denuncias');
             $table->timestamps();
         });
     }

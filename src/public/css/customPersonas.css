@@ -1,0 +1,14 @@
+.textarea {
+    resize: none;
+} 
+.no-spin::-webkit-inner-spin-button, .no-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.no-spin {
+    -moz-appearance:textfield ;
+}
+.error-span {
+    color: red; 
+    margin:5px 0 0 0;
+}

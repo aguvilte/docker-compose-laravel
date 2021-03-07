@@ -6,6 +6,10 @@ use App\Events\ConfirmedRobo;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Models\Robo;
+use App\User;
+use Notification;
+use App\Notifications\PushNotification;
+use App\Notifications\NotificacionAlerta;
 
 class NotificationRobo
 {
@@ -29,7 +33,11 @@ class NotificationRobo
     {
         $numeropatente= $event->movimientoPatente->patente->numero;
         $robo = Robo::where('numero_patente',$numeropatente)->first();
-        if ($robo != null) {
+        if ($robo != null && $robo->estado === Robo::ESTADO_ACTIVO) {
+            $usuarios = User::all();
+            Notification::send($usuarios,new NotificacionAlerta($event->movimientoPatente));
+        }else{
+            return ;
         }
 
     }

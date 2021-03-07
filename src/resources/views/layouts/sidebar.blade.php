@@ -2,10 +2,10 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home')}}">
-    <div class="sidebar-brand-icon rotate-n-15">
-      <i class="fas fa-laugh-wink"></i>
+    <div class="navbar-brand">
+        <img src="{{ asset('img/logo.png') }}" height="65px" >
     </div>
-    <div class="sidebar-brand-text mx-3">ALP Learning</div>
+    <div class="sidebar-brand-text">ALP Learning</div>
   </a>
 <!-- Divider -->
   <hr class="sidebar-divider my-0">
@@ -22,15 +22,22 @@
   
   <li class="nav-item">
     <a class="nav-link" href="{{ route('indexPatente') }}">
-      <i class="fas fa-user-friends" style="color: withe;;" title="Patentes"></i>
+      <i class="fas  fa-car" style="color: withe;;" title="Patentes"></i>
       <span>Patentes</span>
     </a>
   </li>      
   
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('indexPersona') }}">
+    <a class="nav-link" href="{{ route('indexNotificaciones') }}">
+      <i class="fas fa-bell fa-fw" style="color: withe;;" title="Personas robadas"></i>
+      <span>Notificaciones</span>
+    </a>
+  </li>
+        
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('denuncias.index') }}">
       <i class="fas fa-user-friends" style="color: withe;;" title="Personas robadas"></i>
-      <span>Personas</span>
+      <span>Denuncias</span>
     </a>
   </li>
         

@@ -25,17 +25,17 @@ function insertRow(e) {
 function defineModelo(tipoModelo) {
     let tipo;
     if (tipoModelo === "1") {
-        tipo= 'Viejo';
+        tipo= 'ARGENTINA';
     }if (tipoModelo === "2") {
-        tipo= 'Nuevo';
+        tipo= 'MERCOSUR';
     }if (tipoModelo != "1" && tipoModelo != "2" ) {
         tipo='NS'
     }
     return tipo;
 }
 function deleteRow() {
-    var table = document.getElementById("bodyTableMovimiento");
-    var rowCount = table.rows.length;
+    let table = document.getElementById("bodyTableMovimiento");
+    let rowCount = table.rows.length;
 
     table.deleteRow(rowCount -1);
 }

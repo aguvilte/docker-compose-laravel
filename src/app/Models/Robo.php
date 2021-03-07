@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Robo extends Model
 {
-    protected $fillable = ["numero_patente", "persona_robada_id", "fecha_hora"];
+    const ESTADO_ACTIVO = 'En Búsqueda';
+    const ESTADO_INACTIVO = 'Recuperado';
 
-    public function personaRobada()
+    protected $fillable = ["numero_patente", "denuncia_id", "fecha_hora", "decripcion","estado"];
+
+
+    public function denuncia()
     {
-        return $this->belongsTo(PersonaRobada::class);
+       return $this->belongsTo('App\Models\Denuncia');
     }
+    
+    
 }
