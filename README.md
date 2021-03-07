@@ -19,10 +19,11 @@ Bringing up the Docker Compose network with `site` instead of just using `up`, e
 Three additional containers are included that handle Composer, NPM, and Artisan commands *without* having to have these platforms installed on your local computer. Use the following command examples from your project root, modifying them to fit your particular use case.
 
 - `docker-compose run --rm composer update`
+- `docker-compose run --rm npm install`
 - `docker-compose run --rm npm run dev`
-- `touch .env`
+- `touch src/.env`
 - `docker-compose run --rm artisan key:generate` 
-- `docker-compose run --rm artisan migrate`
+- `docker-compose run --rm artisan migrate` (o `docker-compose run --rm artisan migrate:fresh --seed`)
 
 ## Persistent MySQL Storage
 
